@@ -121,6 +121,9 @@ class _DbCtx(threading.local):
         self.transactions = 0
 
     def cleanup(self):
+        '''
+        Cleanup database connection
+        '''
         self.connection.cleanup()
         self.connection = None
 
@@ -161,7 +164,7 @@ def create_engine(user, password, database, host='127.0.0.1', port=3306, **kw):
 
 class _ConnectionCtx(object):
     '''
-    _ConnectionCtx object that can open and close connection context. _ConnectionCtx object can be nested and only the most 
+    _ConnectionCtx object that can open and close connection context. _ConnectionCtx object can be nested and only the most
     outer connection has effect.
 
     with connection():
@@ -337,7 +340,7 @@ def _select(sql, first, *args):
 @with_connection
 def select_one(sql, *args):
     '''
-    Execute select SQL and expected one result. 
+    Execute select SQL and expected one result.
     If no result found, return None.
     If multiple results found, the first one returned.
 
@@ -360,7 +363,7 @@ def select_one(sql, *args):
 @with_connection
 def select_int(sql, *args):
     '''
-    Execute select SQL and expected one int and only one int result. 
+    Execute select SQL and expected one int and only one int result.
 
     >>> n = update('delete from user')
     >>> u1 = dict(id=96900, name='Ada', email='ada@test.org', passwd='A-12345', last_modified=time.time())
